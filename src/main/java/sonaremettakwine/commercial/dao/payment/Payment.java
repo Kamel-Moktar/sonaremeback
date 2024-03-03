@@ -1,23 +1,27 @@
-package sonaremettakwine.commercial.dao.customer;
+package sonaremettakwine.commercial.dao.payment;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+
+import java.util.Date;
+
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Customer {
+public class Payment {
     @Id
-    Long Id;
-    String name;
-    String shortName;
-    String RC;
-    String IF;
-    String NS;
-    String NArticle;
+    Long id;
+    Long number;
+    Date date;
+    String reference;
+    Double amount;
+
 
 }

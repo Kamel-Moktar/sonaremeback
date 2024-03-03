@@ -1,4 +1,4 @@
-package sonaremettakwine.commercial.dao.customer;
+package sonaremettakwine.commercial.dao.unitmeasurement;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -10,14 +10,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Customer {
+public class UnitMeasurement {
     @Id
     Long Id;
     String name;
-    String shortName;
-    String RC;
-    String IF;
-    String NS;
-    String NArticle;
-
 }
