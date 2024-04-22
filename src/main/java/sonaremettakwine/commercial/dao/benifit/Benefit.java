@@ -1,8 +1,8 @@
 package sonaremettakwine.commercial.dao.benifit;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,12 +12,13 @@ import sonaremettakwine.commercial.dao.unitmeasurement.UnitMeasurement;
 @Data
 @AllArgsConstructor @NoArgsConstructor
 public class Benefit {
-    @Id
+    @Id @GeneratedValue(strategy =GenerationType.AUTO)
     Long Id;
     String designation;
     String description;
-    String price;
-    @ManyToOne
+    double price;
+    String sakina;
+    @ManyToOne (fetch = FetchType.EAGER)
     UnitMeasurement unitMeasurement;
 
 }

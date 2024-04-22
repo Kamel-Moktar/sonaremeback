@@ -1,12 +1,10 @@
 package sonaremettakwine.commercial.dao.invoice;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import org.hibernate.annotations.Columns;
 import sonaremettakwine.commercial.dao.customer.Customer;
 
 import java.util.Date;
@@ -14,23 +12,28 @@ import java.util.Date;
 
 @Entity
 @Data
-@AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class Invoice {
     @Id
-    Long id;
-    Long number;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;//system JPA
+    String number;
     Date date;
-    String devise;
-    Double amountExcludingTax;
-    Double amountTax;
-    Double amountIncludingTax;
-    Double holdBackRat;
-    String reference;
-    String object;
+    String devise = "DZD";
+
+    Double amountExcludingTax = 0d;//ht
+    Double amountTax = 0d;  //tva
+    Double amountIncludingTax = 0d;//ttc
+
+    Double holdBackRat = 0D;  //retnue degaranté
+
+    String reference;//contra convention bon de commande .....
+    String object; //motif de facture une action de formation domiciliationn ....
     @ManyToOne
+    @Column(nullable = false)
+
     Customer customer;
-
-
 
 
 }
