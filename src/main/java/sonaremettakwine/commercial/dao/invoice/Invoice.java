@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Columns;
+
 import sonaremettakwine.commercial.dao.customer.Customer;
 
 import java.util.Date;
@@ -18,7 +18,7 @@ public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;//system JPA
-    String number;
+    Long number;
     Date date;
     String devise = "DZD";
 
@@ -31,7 +31,6 @@ public class Invoice {
     String reference;//contra convention bon de commande .....
     String object; //motif de facture une action de formation domiciliationn ....
     @ManyToOne
-    @Column(nullable = false)
 
     Customer customer;
 

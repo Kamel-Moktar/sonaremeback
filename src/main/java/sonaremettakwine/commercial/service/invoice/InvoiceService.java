@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import sonaremettakwine.commercial.dao.invoice.Invoice;
 import sonaremettakwine.commercial.dao.invoice.InvoiceRepository;
 
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class InvoiceService {
@@ -36,6 +38,10 @@ public class InvoiceService {
         newInvoice.setDate(invoice.getDate());
         newInvoice.setNumber(invoice.getNumber());
 
+        Calendar cal = new GregorianCalendar();
+        cal.setTime(invoice.getDate());
+        newInvoice.setNumber(nextInvoiceNumber(String.valueOf(cal.get(Calendar.YEAR))));
+
 
         return invoiceRepository.save(newInvoice);
     }
@@ -49,6 +55,30 @@ public class InvoiceService {
         invoice1.setReference(invoice.getReference());
         invoice1.setCustomer(invoice.getCustomer());
         return invoice1;
+    }
+
+    public Long nextInvoiceNumber(String year)  {
+
+        String d1="01/01/"+year;
+        String d2="31/12/"+year;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+
+        try {
+            Date date1=formatter.parse(d1);
+            Date date2=formatter.parse(d2);
+
+            List<Invoice> invoices=invoiceRepository.getBetweenTowDateSortByNumber(date1,date2);
+
+            if(!invoices.isEmpty()) return invoices.get(0).getNumber()+1;
+            return 1L;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+
+        return 1L;
     }
 
 
