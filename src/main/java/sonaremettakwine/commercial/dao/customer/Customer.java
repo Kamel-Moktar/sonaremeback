@@ -17,13 +17,11 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Long id;
-
     String name;
     String shortName;
-    String RC;
-    String IF;
-    String NS;
-    String NArticle;
-
+    String numRc;
+    String idFiscal;
+    String idStatistic ;
+    String numArticle;
 
 }

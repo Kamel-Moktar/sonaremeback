@@ -31,6 +31,8 @@ public class UniteMesureService {
     public UnitMeasurement update(UnitMeasurement newUnitMeasurement) {
         UnitMeasurement oldUnitMeasurement = unitMeasurementRepository.getReferenceById(newUnitMeasurement.getId());
         oldUnitMeasurement.setName(newUnitMeasurement.getName());
+        oldUnitMeasurement.setAbbreviation(newUnitMeasurement.getAbbreviation());
+        oldUnitMeasurement.setDescription(newUnitMeasurement.getDescription());
 
         return oldUnitMeasurement;
     }

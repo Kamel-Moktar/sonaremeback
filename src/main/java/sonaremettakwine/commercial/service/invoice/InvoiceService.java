@@ -24,7 +24,7 @@ public class InvoiceService {
 
     }
 
-    Invoice getInvoiceById(Long id){
+    public Invoice getInvoiceById(Long id){
         return invoiceRepository.getReferenceById(id);
     }
 

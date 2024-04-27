@@ -1,6 +1,7 @@
 package sonaremettakwine.commercial.dao.sale;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,7 @@ import sonaremettakwine.commercial.dao.invoice.Invoice;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Sale {
-    @Id
+    @Id @GeneratedValue
     Long id;
     @ManyToOne
     Invoice invoice;
@@ -24,6 +25,7 @@ public class Sale {
 
     Double quantity;
     Double price;
+    String observation;
 
 
 }

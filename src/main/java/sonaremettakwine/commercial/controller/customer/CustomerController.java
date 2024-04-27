@@ -1,7 +1,6 @@
 package sonaremettakwine.commercial.controller.customer;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sonaremettakwine.commercial.dao.customer.Customer;
 import sonaremettakwine.commercial.service.customer.CustomerService;

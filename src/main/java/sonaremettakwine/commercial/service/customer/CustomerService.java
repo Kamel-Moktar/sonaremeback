@@ -31,13 +31,14 @@ public class CustomerService {
     public void delete(Customer customer){ customerRepository.delete(customer);  }
 
     public Customer update(Customer customer){
+
         Customer customer1=getCustomerById(customer.getId());
         customer1.setName(customer.getName());
         customer1.setShortName(customer.getShortName());
-        customer1.setRC(customer.getRC());
-        customer1.setIF(customer.getIF());
-        customer1.setNS(customer.getNS());
-        customer1.setNArticle(customer.getNArticle());
+        customer1.setNumRc(customer.getNumRc());
+        customer1.setIdFiscal(customer.getIdFiscal());
+        customer1.setIdStatistic(customer.getIdStatistic());
+        customer1.setNumArticle(customer.getNumArticle());
 
         return customer1;
     }

@@ -15,4 +15,7 @@ public class UnitMeasurement {
     @Id @GeneratedValue
     Long Id;
     String name;
+    String abbreviation;
+    String description;
+
 }

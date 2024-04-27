@@ -22,6 +22,11 @@ public class InvoiceController {
         return invoiceService.getAll();
     }
 
+    @GetMapping("/byid/{id}")
+    public Invoice getInvoiceById(@PathVariable Long id) {
+        return invoiceService.getInvoiceById(id);
+    }
+
 
     @PostMapping("/add")
     public Invoice add(@RequestBody Invoice invoice) {
