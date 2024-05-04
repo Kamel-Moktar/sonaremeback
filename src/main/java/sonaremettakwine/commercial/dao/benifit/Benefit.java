@@ -15,7 +15,7 @@ public class Benefit {
     String designation;
     String description;
     double price;
-    String sakina;
+
     @ManyToOne (fetch = FetchType.EAGER)
     UnitMeasurement unitMeasurement;
 

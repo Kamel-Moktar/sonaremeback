@@ -19,6 +19,10 @@ public class BenefitController {
         return benefitService.getAll();
     }
 
+    @GetMapping("/byid/{id}")
+    public Benefit getById(@PathVariable Long id) {
+        return benefitService.getBenefitById(id);
+    }
 
     @PostMapping("/add")
     public Benefit add(@RequestBody Benefit benefit) {
@@ -27,9 +31,12 @@ public class BenefitController {
 
     }
 
+
+
     @PostMapping("/delete")
     public Benefit delete(@RequestBody Benefit benefit) {
         benefitService.delete(benefit);
+      // FrenchNumberToWords frenchNumberToWords;
         return benefit;
     }
 

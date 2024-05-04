@@ -21,6 +21,7 @@ public class Invoice {
     Long number;
     Date date;
     String devise = "DZD";
+    Double tva=0.09D;
 
     Double amountExcludingTax = 0d;//ht
     Double amountTax = 0d;  //tva

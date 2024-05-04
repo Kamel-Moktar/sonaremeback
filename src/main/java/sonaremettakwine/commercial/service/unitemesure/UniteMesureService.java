@@ -2,12 +2,14 @@ package sonaremettakwine.commercial.service.unitemesure;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import sonaremettakwine.commercial.dao.unitmeasurement.UnitMeasurement;
 import sonaremettakwine.commercial.dao.unitmeasurement.UnitMeasurementRepository;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class UniteMesureService {
     @Autowired
     UnitMeasurementRepository unitMeasurementRepository;
@@ -28,12 +30,12 @@ public class UniteMesureService {
         unitMeasurementRepository.delete(unitMeasurement);
     }
 
-    public UnitMeasurement update(UnitMeasurement newUnitMeasurement) {
-        UnitMeasurement oldUnitMeasurement = unitMeasurementRepository.getReferenceById(newUnitMeasurement.getId());
-        oldUnitMeasurement.setName(newUnitMeasurement.getName());
-        oldUnitMeasurement.setAbbreviation(newUnitMeasurement.getAbbreviation());
-        oldUnitMeasurement.setDescription(newUnitMeasurement.getDescription());
-
-        return oldUnitMeasurement;
+    public UnitMeasurement update(UnitMeasurement unitMeasurement) {
+        UnitMeasurement unitMeasurement1 = getById(unitMeasurement.getId());
+        unitMeasurement1.setName(unitMeasurement.getName());
+        unitMeasurement1.setSymbol(unitMeasurement.getSymbol());
+        unitMeasurement1.setDesignation(unitMeasurement.getDesignation());
+        System.out.println("éééééééééééééééééééééééééééééé"+unitMeasurement1);
+        return unitMeasurement1;
     }
 }

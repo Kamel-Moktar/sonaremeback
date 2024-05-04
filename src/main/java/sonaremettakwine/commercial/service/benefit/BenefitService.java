@@ -30,14 +30,14 @@ public class BenefitService {
 
     public Benefit update(Benefit benefit){
 
-//        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@"+benefit);
+
 
         Benefit benefit1=getBenefitById(benefit.getId());
 
         benefit1.setDesignation(benefit.getDesignation());
         benefit1.setDescription(benefit.getDescription());
         benefit1.setPrice(benefit.getPrice());
-        benefit1.setSakina(benefit.getSakina());
+
         benefit1.setUnitMeasurement(benefit.getUnitMeasurement());
 
 

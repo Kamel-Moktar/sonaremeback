@@ -16,18 +16,20 @@ public class UniteMesureController {
     @PostMapping("/all")
    public List<UnitMeasurement> getAll(@RequestBody String name ){
        String name1= !name.equals("*") ?name:"";
-
-
         return  uniteMesureService.getAll(name1);
    }
 
+   @GetMapping("/byid/{id}")
+   public UnitMeasurement getUnteMesurById(@PathVariable Long id){
+        return uniteMesureService.getById(id);
+   }
 
 
    @PostMapping("/add")
     public UnitMeasurement add(@ RequestBody  UnitMeasurement unitMeasurement){
         return  uniteMesureService.add(unitMeasurement);
    }
-    @PostMapping("/kadour")
+    @PostMapping("/delete")
     public UnitMeasurement delete(@RequestBody  UnitMeasurement unitMeasurement){
         uniteMesureService.delete(unitMeasurement);
         return unitMeasurement;
@@ -35,8 +37,8 @@ public class UniteMesureController {
 
     @PostMapping("/update")
     public UnitMeasurement update(@RequestBody  UnitMeasurement unitMeasurement){
-        return  uniteMesureService.update(unitMeasurement);
 
+        return  uniteMesureService.update(unitMeasurement);
     }
 
 

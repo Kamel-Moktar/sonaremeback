@@ -23,14 +23,26 @@ public class SaleController {
         Invoice invoice= invoiceService.getInvoiceById(id);
         return saleService.getSaleByInvoice(invoice);
     }
+
+    @GetMapping("/byid/{id}")
+    Sale getSaleById(@PathVariable Long id){
+
+        return saleService.getSaleById(id);
+    }
     @PostMapping("/add")
     Sale add(@RequestBody Sale sale){
         return saleService.add(sale);
     }
+
     @PostMapping("/delete")
     Sale delete(@RequestBody Sale sale){
          saleService.delete(sale);
          return sale;
+    }
+
+    @PostMapping("/update")
+    Sale update(@RequestBody  Sale sale){
+       return  saleService.update(sale) ;
     }
 
 }

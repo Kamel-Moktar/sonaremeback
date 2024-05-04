@@ -19,6 +19,9 @@ public class Customer {
     Long id;
     String name;
     String shortName;
+    String adresse;
+    String phoneNumber;
+    String fax;
     String numRc;
     String idFiscal;
     String idStatistic ;
