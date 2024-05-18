@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import sonaremettakwine.commercial.dao.invoice.Invoice;
 import sonaremettakwine.commercial.dao.payment.Payment;
 
@@ -11,11 +12,15 @@ import sonaremettakwine.commercial.dao.payment.Payment;
 @Data
 @AllArgsConstructor @NoArgsConstructor
 public class Encaissement {
-    @Id
+    @Id @GeneratedValue
     Long id;
     @ManyToOne
+    @NonNull
     Invoice invoice;
     @ManyToOne
+    @NonNull
     Payment payment;
+    @NonNull
     Double amount;
+    String obs;
 }

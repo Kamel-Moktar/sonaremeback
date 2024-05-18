@@ -2,7 +2,6 @@ package sonaremettakwine.commercial.service.invoice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
 import sonaremettakwine.commercial.dao.invoice.Invoice;
 import sonaremettakwine.commercial.dao.invoice.InvoiceRepository;
@@ -19,21 +18,29 @@ public class InvoiceService {
     InvoiceRepository invoiceRepository;
 
 
-
-    public List<Invoice> getAll(){
+    public List<Invoice> getAll() {
 
         return invoiceRepository.getAllSortByID();
 
     }
 
-    public Invoice getInvoiceById(Long id){
+    public Invoice getInvoiceById(Long id) {
         return invoiceRepository.getReferenceById(id);
     }
 
+    public List<Invoice> getDebts() {
+        return invoiceRepository.debts();
+    }
 
+    public List<Invoice> getDebtsByNumberByCustomerByDate(String number, String shortName, String date) {
+        return invoiceRepository.getDebtsByNumberByCustomerByDate(number, shortName, date);
+    }
+    public List<Invoice> getAllByNumberByCustomerByDate(String number, String shortName, String date) {
+        return invoiceRepository.getAllByNumberByCustomerByDate(number, shortName, date);
+    }
 
-    public Invoice add(Invoice invoice){
-        Invoice newInvoice=new Invoice();
+    public Invoice add(Invoice invoice) {
+        Invoice newInvoice = new Invoice();
         newInvoice.setCustomer(invoice.getCustomer());
         newInvoice.setReference(invoice.getReference());
         newInvoice.setObject(invoice.getObject());
@@ -48,38 +55,44 @@ public class InvoiceService {
         return invoiceRepository.save(newInvoice);
     }
 
-    public void delete(Invoice invoice){ invoiceRepository.delete(invoice);  }
+    public void delete(Invoice invoice) {
+        invoiceRepository.delete(invoice);
+    }
 
-    public Invoice update(Invoice invoice){
-        Invoice invoice1=getInvoiceById(invoice.getId());
+    public Invoice update(Invoice invoice) {
+        Invoice invoice1 = getInvoiceById(invoice.getId());
         invoice1.setDate(invoice.getDate());
         invoice1.setObject(invoice.getObject());
         invoice1.setReference(invoice.getReference());
         invoice1.setCustomer(invoice.getCustomer());
+
         return invoice1;
     }
 
-    public Long nextInvoiceNumber(String year)  {
 
-        String d1="01/01/"+year;
-        String d2="31/12/"+year;
+    public Invoice updateRemains(Long id, Double remains) {
+        Invoice invoice1 = getInvoiceById(id);
+        invoice1.setRemains(remains);
+
+        return invoice1;
+    }
+
+
+    public Long nextInvoiceNumber(String year) {
+
+        String d1 = "01/01/" + year;
+        String d2 = "31/12/" + year;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
-
         try {
-            Date date1=formatter.parse(d1);
-            Date date2=formatter.parse(d2);
-
-            List<Invoice> invoices=invoiceRepository.getBetweenTowDateSortByNumber(date1,date2);
-
-            if(!invoices.isEmpty()) return invoices.get(0).getNumber()+1;
+            Date date1 = formatter.parse(d1);
+            Date date2 = formatter.parse(d2);
+            List<Invoice> invoices = invoiceRepository.getBetweenTowDateSortByNumber(date1, date2);
+            if (!invoices.isEmpty()) return invoices.get(0).getNumber() + 1;
             return 1L;
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
-
         return 1L;
     }
 

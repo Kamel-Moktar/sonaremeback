@@ -1,11 +1,14 @@
 package sonaremettakwine.commercial.dao.payment;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import sonaremettakwine.commercial.dao.customer.Customer;
 
 
 import java.util.Date;
@@ -16,12 +19,13 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Payment {
-    @Id
+    @Id @GeneratedValue
     Long id;
-    Long number;
     Date date;
     String reference;
     Double amount;
+    @ManyToOne
+    Customer customer;
 
 
 }

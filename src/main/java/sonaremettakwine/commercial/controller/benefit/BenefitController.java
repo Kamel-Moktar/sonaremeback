@@ -26,17 +26,12 @@ public class BenefitController {
 
     @PostMapping("/add")
     public Benefit add(@RequestBody Benefit benefit) {
-
         return benefitService.add(benefit);
-
     }
-
-
 
     @PostMapping("/delete")
     public Benefit delete(@RequestBody Benefit benefit) {
         benefitService.delete(benefit);
-      // FrenchNumberToWords frenchNumberToWords;
         return benefit;
     }
 

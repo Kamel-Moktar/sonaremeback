@@ -48,19 +48,19 @@ public class SaleService {
         sale.setBenefit(newSale.getBenefit());
         sale.setQuantity(newSale.getQuantity());
         sale.setPrice(newSale.getPrice());
-
         culeTotals(invoice);
         return sale;
     }
 
 
     public  void culeTotals(Invoice invoice) {
+
         List<Sale> sales = saleRepository.getSaleByInvoice(invoice);
         double ht = sales.stream().mapToDouble(e -> e.getPrice() * e.getQuantity()).sum();
         invoice.setAmountExcludingTax(ht);
         invoice.setAmountTax(ht * invoice.getTva());
         invoice.setAmountIncludingTax(ht * (invoice.getTva() + 1));
-
+        invoice.setRemains(ht * (invoice.getTva() + 1));
     }
 
 }

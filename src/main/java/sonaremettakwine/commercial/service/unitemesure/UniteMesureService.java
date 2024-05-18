@@ -35,7 +35,6 @@ public class UniteMesureService {
         unitMeasurement1.setName(unitMeasurement.getName());
         unitMeasurement1.setSymbol(unitMeasurement.getSymbol());
         unitMeasurement1.setDesignation(unitMeasurement.getDesignation());
-        System.out.println("éééééééééééééééééééééééééééééé"+unitMeasurement1);
         return unitMeasurement1;
     }
 }
