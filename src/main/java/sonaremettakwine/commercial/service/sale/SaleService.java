@@ -45,7 +45,9 @@ public class SaleService {
     public Sale update(Sale newSale) {
         Sale sale = getSaleById(newSale.getId());
         Invoice invoice = invoiceService.getInvoiceById(sale.getInvoice().getId());
+
         sale.setBenefit(newSale.getBenefit());
+        sale.setNumber(newSale.getNumber());
         sale.setQuantity(newSale.getQuantity());
         sale.setPrice(newSale.getPrice());
         culeTotals(invoice);
@@ -56,7 +58,7 @@ public class SaleService {
     public  void culeTotals(Invoice invoice) {
 
         List<Sale> sales = saleRepository.getSaleByInvoice(invoice);
-        double ht = sales.stream().mapToDouble(e -> e.getPrice() * e.getQuantity()).sum();
+        double ht = sales.stream().mapToDouble(e -> e.getPrice() *e.getNumber()* e.getQuantity()).sum();
         invoice.setAmountExcludingTax(ht);
         invoice.setAmountTax(ht * invoice.getTva());
         invoice.setAmountIncludingTax(ht * (invoice.getTva() + 1));

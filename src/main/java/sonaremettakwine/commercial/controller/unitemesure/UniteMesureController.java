@@ -2,6 +2,7 @@ package sonaremettakwine.commercial.controller.unitemesure;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import sonaremettakwine.commercial.dao.unit.Unit;
 import sonaremettakwine.commercial.dao.unitmeasurement.UnitMeasurement;
 import sonaremettakwine.commercial.service.unitemesure.UniteMesureService;
 
@@ -18,6 +19,10 @@ public class UniteMesureController {
        String name1= !name.equals("*") ?name:"";
         return  uniteMesureService.getAll(name1);
    }
+    @GetMapping("/unit")
+    public List<Unit> getUnits(){
+        return  uniteMesureService.getAllUnitSortedByName();
+    }
 
    @GetMapping("/byid/{id}")
    public UnitMeasurement getUnteMesurById(@PathVariable Long id){
