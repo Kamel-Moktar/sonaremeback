@@ -1,5 +1,8 @@
 package sonaremettakwine.commercial.controller.customer;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sonaremettakwine.commercial.dao.customer.Customer;
@@ -23,6 +26,14 @@ public class CustomerController {
         return customerService.getCustomerById(id);
     }
 
+    @PostMapping("/allparam")
+    public List<Customer> getByName(@RequestBody Param param){
+
+        String name=!param.getName().equals("*") ?param.getName():"";
+        String shortName=!param.getName().equals("*") ?param.getShortName():"";
+        return customerService.getCustomerByName(param.getName(),param.getShortName());
+    }
+
 
     @PostMapping("/add")
        public Customer add(@RequestBody Customer customer){
@@ -42,4 +53,12 @@ public class CustomerController {
 
     }
 
+}
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+class Param {
+    String name;
+    String shortName;
 }

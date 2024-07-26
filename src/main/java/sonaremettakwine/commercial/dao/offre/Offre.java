@@ -31,7 +31,7 @@ public class Offre {
     @NonNull
     Double number = 1D;
     @ManyToOne
-    @NonNull
+
     Unit unit;
 
     @NonNull

@@ -47,4 +47,10 @@ public class CustomerService {
 
         return customer1;
     }
+
+    public List<Customer> getCustomerByName(String name,String shortName) {
+
+
+        return customerRepository.getCustomersByName(name,shortName);
+    }
 }
