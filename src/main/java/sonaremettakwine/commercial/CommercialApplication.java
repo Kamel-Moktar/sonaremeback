@@ -1,5 +1,10 @@
 package sonaremettakwine.commercial;
 
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,8 +14,14 @@ import org.springframework.core.Ordered;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import sonaremettakwine.commercial.dao.unit.Unit;
-import sonaremettakwine.commercial.dao.unit.UnitRepository;
+import sonaremettakwine.commercial.dao.decoupage.Decoupage;
+import sonaremettakwine.commercial.dao.decoupage.DecoupageRepository;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
+
 
 @SpringBootApplication
 public class CommercialApplication {
@@ -37,17 +48,33 @@ public class CommercialApplication {
     }
 
 //    @Bean
-//    public CommandLineRunner start(UnitRepository unitRepository) {
+//    public CommandLineRunner start(DecoupageRepository decoupageRepository) {
 //        return arg -> {
-//            unitRepository.save(new Unit("Stagiaire"));
-//            unitRepository.save(new Unit("Personne"));
-//            unitRepository.save(new Unit("Groupe"));
-//            unitRepository.save(new Unit("Collaborateur"));
-//            unitRepository.save(new Unit("Agent"));
-//            unitRepository.save(new Unit("Salle"));
-//            unitRepository.save(new Unit("Bus"));
-//            unitRepository.save(new Unit("Chambre"));
-//            unitRepository.save(new Unit("Pax"));
+//
+//            JSONParser parser = new JSONParser();
+//            URL url = getClass().getClassLoader().getResource("wilaya.json");
+//            try {
+//                Object obj = parser.parse(new FileReader(url.getFile()));
+//                JSONArray jsonObject = (JSONArray) obj;
+//              jsonObject.forEach(e->{
+//
+//                  JSONObject w = (JSONObject) e;
+//                  Decoupage decoupage = new Decoupage((Long) w.get("id"), (String) w.get("commune_name"), (String) w.get("daira_name"), (String) w.get("wilaya_code"), (String) w.get("wilaya_name"));
+//
+//                  decoupageRepository.save(decoupage);
+//              });
+//
+//
+//
+//
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//
 //        };
 //    }
 

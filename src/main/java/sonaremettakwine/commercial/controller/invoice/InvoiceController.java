@@ -29,21 +29,15 @@ public class InvoiceController {
     }
 
     @PostMapping("/debtsparam")
-    public List<Invoice> getDebtsParam(@RequestBody  Param param) {
-        String number=!param.getNumber().equals("*") ?param.getNumber():"";
-        String shortName=!param.getShortName().equals("*") ?param.getShortName():"";
-        String date=!param.getDate().equals("*") ?param.getDate():"";
-
-        return invoiceService.getDebtsByNumberByCustomerByDate(number,shortName,date);
+    public List<Invoice> getDebtsParam(@RequestBody Param param) {
+        return invoiceService.getDebtsByNumberByCustomerByDate(param.number, param.shortName, param.date);
     }
+
     @PostMapping("/allparam")
-    public List<Invoice> getAllParam(@RequestBody  Param param) {
-        String number=!param.getNumber().equals("*") ?param.getNumber():"";
-        String shortName=!param.getShortName().equals("*") ?param.getShortName():"";
-        String date=!param.getDate().equals("*") ?param.getDate():"";
-
-        return invoiceService.getAllByNumberByCustomerByDate(number,shortName,date);
+    public List<Invoice> getAllParam(@RequestBody Param param) {
+        return invoiceService.getAllByNumberByCustomerByDate(param.number, param.shortName, param.date);
     }
+
     @GetMapping("/byid/{id}")
     public Invoice getInvoiceById(@PathVariable Long id) {
         return invoiceService.getInvoiceById(id);

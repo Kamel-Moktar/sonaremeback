@@ -26,9 +26,8 @@ public class ActionController {
 
     @PostMapping("/allparam")
     public List<Action> getAllParam(@RequestBody Param param) {
-        String name=!param.getName().equals("*") ?param.getName():"";
-        String domainName=!param.getDomainName().equals("*") ?param.getDomainName():"";
-        return actionService.getAllOrderByName(name,domainName);
+
+        return actionService.getAllOrderByName(param.name, param.domainName);
     }
 
     @GetMapping("/byid/{id}")

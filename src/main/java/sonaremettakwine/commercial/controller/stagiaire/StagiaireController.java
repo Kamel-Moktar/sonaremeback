@@ -1,7 +1,11 @@
 package sonaremettakwine.commercial.controller.stagiaire;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import sonaremettakwine.commercial.dao.stagiaire.Stagiaire;
 import sonaremettakwine.commercial.service.stagiaire.StagiaireService;
 
@@ -23,6 +27,11 @@ public class StagiaireController {
         return stagiaireService.getStagiaireById(id);
     }
 
+    @PostMapping("/param")
+    public List<Stagiaire> getParam(@RequestBody Param param){
+        System.out.print(param);
+        return stagiaireService.getAllParam(param.getFamilyName(),param.getFirstName(),param.getBirthDay(),param.getCustomer());
+    }
 
     @PostMapping("/add")
     public Stagiaire add(@RequestBody Stagiaire stagiaire){
@@ -44,3 +53,12 @@ public class StagiaireController {
 
 }
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+class Param{
+     String familyName;
+     String firstName;
+     String birthDay;
+     String customer;
+}

@@ -1,5 +1,6 @@
-package sonaremettakwine.commercial.dao.phase;
+package sonaremettakwine.commercial.dao.inscription;
 
+import com.fasterxml.jackson.databind.DatabindException;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -7,35 +8,27 @@ import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import sonaremettakwine.commercial.dao.action.Action;
 import sonaremettakwine.commercial.dao.session.Session;
+import sonaremettakwine.commercial.dao.stagiaire.Stagiaire;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Phase {
-    @Id @GeneratedValue
+public class Inscription {
+    @Id
+    @GeneratedValue
     Long id;
-
-    String name;
-    Date startDate;
-    Date endDate;
-    String type;
-    TypePhase typePhase;
-    LieuPhase lieuPhase;
+    @ManyToOne
+    Stagiaire stagiaire;
     @ManyToOne
     Session session;
 
+    String inscriptionReference;
+    Date arriveDate;
+    Date exclusionDate;
+    String exclusionReference;
 
 }
-
-
-//enum ModPhase{
-//    PRESENTIELE,
-//    VISIO,
-//    E_LEARNING
-//}

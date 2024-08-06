@@ -3,10 +3,12 @@ package sonaremettakwine.commercial.service.stagiaire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 import sonaremettakwine.commercial.dao.stagiaire.Stagiaire;
 import sonaremettakwine.commercial.dao.stagiaire.StagiaireRepository;
 
 import java.util.List;
+
 @Service
 @Transactional
 public class StagiaireService {
@@ -15,35 +17,44 @@ public class StagiaireService {
     @Autowired
     StagiaireRepository stagiaireRepository;//
 
-    public List<Stagiaire> getAll(){
+    public List<Stagiaire> getAll() {
 
         return stagiaireRepository.getAllSortByName();
 
     }
 
-    public Stagiaire getStagiaireById(Long id){
+    public Stagiaire getStagiaireById(Long id) {
         return stagiaireRepository.getReferenceById(id);
     }
 
+    public List<Stagiaire> getAllParam(String familyName, String firstName, String birthDay, String customer) {
+        return stagiaireRepository.getParamSortByName(
+                birthDay,
+               familyName ,
+                firstName,
+                customer
+        );
+    }
 
+    public Stagiaire add(Stagiaire stagiaire) {
 
-    public Stagiaire add(Stagiaire stagiaire){
         return stagiaireRepository.save(stagiaire);
     }
 
-    public void delete(Stagiaire stagiaire){ stagiaireRepository.delete(stagiaire);  }
+    public void delete(Stagiaire stagiaire) {
+        stagiaireRepository.delete(stagiaire);
+    }
 
-    public Stagiaire update(Stagiaire stagiaire){
+    public Stagiaire update(Stagiaire stagiaire) {
 
-        Stagiaire stagiaire1=getStagiaireById(stagiaire.getId());
+        Stagiaire stagiaire1 = getStagiaireById(stagiaire.getId());
         stagiaire1.setFamilyName(stagiaire.getFamilyName());
         stagiaire1.setFirstName(stagiaire.getFirstName());
         stagiaire1.setBirthDay(stagiaire.getBirthDay());
         stagiaire1.setBirthPlace(stagiaire.getBirthPlace());
-        stagiaire1.setAdresses(stagiaire.getAdresses());
+        stagiaire1.setAdresse(stagiaire.getAdresse());
         stagiaire1.setPhoneNumber(stagiaire.getPhoneNumber());
-        stagiaire1.setEMail(stagiaire.getEMail());
-
+        stagiaire1.setMailAdresse(stagiaire.getMailAdresse());
 
 
         return stagiaire1;

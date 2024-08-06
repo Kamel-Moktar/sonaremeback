@@ -3,7 +3,9 @@ package sonaremettakwine.commercial.controller.phase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sonaremettakwine.commercial.dao.invoice.Invoice;
+import sonaremettakwine.commercial.dao.phase.LieuPhase;
 import sonaremettakwine.commercial.dao.phase.Phase;
+import sonaremettakwine.commercial.dao.phase.TypePhase;
 import sonaremettakwine.commercial.dao.session.Session;
 import sonaremettakwine.commercial.service.phase.PhaseService;
 import sonaremettakwine.commercial.service.session.SessionService;
@@ -39,6 +41,13 @@ public class PhaseController {
         return phaseService.getPhaseById(id);
     }
 
+    @GetMapping("/phasepropose/{sessionId}")
+
+    public Phase getPhasePropose(@PathVariable Long sessionId){
+        Session session=sessionService.getSessionById(sessionId);
+        return phaseService.phasePropose(session);
+    }
+
 
     @PostMapping("/add")
     public Phase add(@RequestBody Phase phase){
@@ -58,6 +67,14 @@ public class PhaseController {
 
     }
 
+    @GetMapping("/typephase")
+    public TypePhase[] getTypePhaseValues(){
+        return phaseService.getTypePhaseValues();
+    }
+    @GetMapping("/lieuphase")
+    public LieuPhase[] getLieuPhaseValues(){
+        return phaseService.getLieuPhaseValues();
+    }
 
 
 }
