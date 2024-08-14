@@ -14,34 +14,34 @@ public class DomaineController {
 
 
     @Autowired
-    DomaineService comaineService;
+    DomaineService domaineService;
 
     @GetMapping("/all")
     public List<Domaine> getAll(){
-        return comaineService.getAll();
+        return domaineService.getAll();
     }
 
     @GetMapping("/byid/{id}")
     public Domaine getById(@PathVariable Long id){
-        return comaineService.getDomaineById(id);
+        return domaineService.getDomaineById(id);
     }
 
 
     @PostMapping("/add")
-    public Domaine add(@RequestBody Domaine comaine){
+    public Domaine add(@RequestBody Domaine domaine){
 
-        return comaineService.add(comaine);
+        return domaineService.add(domaine);
 
     }
     @PostMapping("/delete")
-    public Domaine delete(@RequestBody  Domaine comaine){
-        comaineService.delete(comaine);
-        return comaine;
+    public Domaine delete(@RequestBody  Domaine domaine){
+        domaineService.delete(domaine);
+        return domaine;
     }
 
     @PostMapping("/update")
-    public Domaine update(@RequestBody  Domaine comaine){
-        return  comaineService.update(comaine);
+    public Domaine update(@RequestBody  Domaine domaine){
+        return  domaineService.update(domaine);
 
     }
 

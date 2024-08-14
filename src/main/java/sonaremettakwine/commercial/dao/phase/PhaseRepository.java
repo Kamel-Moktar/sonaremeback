@@ -16,7 +16,7 @@ public interface PhaseRepository extends JpaRepository<Phase,Long> {
 
     @Query("select p from Phase p " +
             " where p.session = :session " +
-            " order by p.startDate DESC " )
+            " order by p.startDate " )
     List<Phase> getAllBySessionSortByStartDate(@RequestParam Session session);
 
 }
