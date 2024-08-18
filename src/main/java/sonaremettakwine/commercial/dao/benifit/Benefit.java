@@ -15,6 +15,8 @@ public class Benefit {
     String designation;
     String description;
     double price;
+    @Column(columnDefinition = "float default 0.09")
+    double tva;
 
     @ManyToOne (fetch = FetchType.EAGER)
     UnitMeasurement unitMeasurement;

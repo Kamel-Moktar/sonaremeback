@@ -1,11 +1,10 @@
 package sonaremettakwine.commercial.dao.booking;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Check;
 import sonaremettakwine.commercial.dao.hotel.Hotel;
 import sonaremettakwine.commercial.dao.inscription.Inscription;
 import sonaremettakwine.commercial.dao.stagiaire.Stagiaire;
@@ -13,12 +12,13 @@ import sonaremettakwine.commercial.dao.stagiaire.Stagiaire;
 import java.util.Date;
 
 @Entity
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Booking {
 
-    @Id
+    @Id @GeneratedValue
     private Long id;
     @ManyToOne
     Inscription inscription;

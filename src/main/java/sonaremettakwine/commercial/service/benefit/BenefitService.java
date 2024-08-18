@@ -37,6 +37,7 @@ public class BenefitService {
         benefit1.setDesignation(benefit.getDesignation());
         benefit1.setDescription(benefit.getDescription());
         benefit1.setPrice(benefit.getPrice());
+        benefit1.setTva(benefit.getTva());
 
         benefit1.setUnitMeasurement(benefit.getUnitMeasurement());
 

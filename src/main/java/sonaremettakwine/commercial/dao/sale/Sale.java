@@ -18,21 +18,17 @@ public class Sale {
     @Id @GeneratedValue
     Long id;
     @ManyToOne
-    @NonNull
     Invoice invoice;
 
     @ManyToOne
-    @NonNull
     Benefit benefit;
-    @NonNull
+
     Double number=1D;
     @ManyToOne
-    @NonNull
     Unit unit;
 
-    @NonNull
     Double quantity;
-    @NonNull
+
     Double price;
     String observation;
 

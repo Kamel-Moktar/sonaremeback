@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import org.springframework.context.annotation.Lazy;
 
 @Entity
 @Data
@@ -13,19 +11,23 @@ import org.springframework.context.annotation.Lazy;
 @NoArgsConstructor
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE )
     Long id;
-    @NonNull
+
     String name;
-    @NonNull
+
     String shortName;
-    @NonNull
+
     String adresse;
     String phoneNumber;
     String fax;
     String numRc;
     String idFiscal;
-    String idStatistic ;
+    String idStatistic;
     String numArticle;
+    @Column(columnDefinition = ("boolean  default false"))
+    boolean exemptFromTax;
+    @Column(columnDefinition = ("boolean  default false"))
+    boolean sameCompany;
 
 }

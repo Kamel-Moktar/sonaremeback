@@ -39,6 +39,10 @@ public class InvoiceService {
         return invoiceRepository.getAllByNumberByCustomerByDate(number, shortName, date);
     }
 
+
+    public List<Invoice> getTurnoverByNumberByCustomerByDate(String number, String shortName, String date) {
+        return invoiceRepository.getTurnoverByNumberByCustomerByDate(number, shortName, date);
+    }
     public Invoice add(Invoice invoice) {
         Invoice newInvoice = new Invoice();
         newInvoice.setCustomer(invoice.getCustomer());

@@ -38,6 +38,12 @@ public class InvoiceController {
         return invoiceService.getAllByNumberByCustomerByDate(param.number, param.shortName, param.date);
     }
 
+    @PostMapping("/turnover")
+    public List<Invoice> getturnoverByNumberByCustomerByDate(@RequestBody Param param) {
+        return invoiceService.getTurnoverByNumberByCustomerByDate(param.number, param.shortName, param.date);
+    }
+
+
     @GetMapping("/byid/{id}")
     public Invoice getInvoiceById(@PathVariable Long id) {
         return invoiceService.getInvoiceById(id);

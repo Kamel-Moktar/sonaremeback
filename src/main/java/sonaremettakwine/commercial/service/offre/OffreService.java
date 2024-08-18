@@ -3,13 +3,14 @@ package sonaremettakwine.commercial.service.offre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sonaremettakwine.commercial.dao.benifit.Tva;
 import sonaremettakwine.commercial.dao.offre.Offre;
 import sonaremettakwine.commercial.dao.offre.OffreRepository;
-import sonaremettakwine.commercial.dao.proforma.Proforma ;
-
+import sonaremettakwine.commercial.dao.proforma.Proforma;
 import sonaremettakwine.commercial.service.proforma.ProformaService;
 
 import java.util.List;
+
 @Service
 @Transactional
 public class OffreService {
@@ -19,13 +20,16 @@ public class OffreService {
     ProformaService proformaService;
 
 
-    public List<Offre> getOffreByProforma (Proforma  proforma) {
-        return offreRepository.getOffreByProforma (proforma);
+    public List<Offre> getOffreByProforma(Proforma proforma) {
+        return offreRepository.getOffreByProforma(proforma);
     }
 
+    public List<Offre> getOffreByProformaByTva(Proforma proforma, double tva) {
+        return offreRepository.getOffreByProformaByTva(proforma,tva);
+    }
     public Offre add(Offre offre) {
         Proforma proforma = proformaService.getProformaById(offre.getProforma().getId());
-        Offre offre1=offreRepository.save(offre);
+        Offre offre1 = offreRepository.save(offre);
         culeTotals(proforma);
         return offre1;
     }
@@ -55,14 +59,27 @@ public class OffreService {
     }
 
 
-    public  void culeTotals(Proforma proforma) {
+    public double getTotalTva(Proforma proforma, double taux) {
+        List<Offre> offres = offreRepository.getOffreByProformaByTva(proforma,taux);
+        return offres.stream().mapToDouble(
+                e -> e.getPrice() * e.getNumber() * e.getQuantity()*e.getBenefit().getTva()).sum();
+    }
+
+
+
+    public void culeTotals(Proforma proforma) {
 
         List<Offre> offres = offreRepository.getOffreByProforma(proforma);
-        double ht = offres.stream().mapToDouble(e -> e.getPrice() *e.getNumber()* e.getQuantity()).sum();
+        double ht = offres.stream().mapToDouble(e -> e.getPrice() * e.getNumber() * e.getQuantity()).sum();
+        double tvaNormal=getTotalTva(proforma,Tva.NORMAL.getTaux().doubleValue());
+        double tvaReduite=getTotalTva(proforma,Tva.REDUITE.getTaux().doubleValue());
+        double tva=tvaNormal+tvaReduite;
+        double ttc=tva+ht;
+
         proforma.setAmountExcludingTax(ht);
-        proforma.setAmountTax(ht * proforma.getTva());
-        proforma.setAmountIncludingTax(ht * (proforma.getTva() + 1));
-        proforma.setRemains(ht * (proforma.getTva() + 1));
+        proforma.setAmountTax(tva);
+        proforma.setAmountIncludingTax(ttc);
+        //proforma.setRemains(ht * (proforma.get() + 1));
     }
 
 }

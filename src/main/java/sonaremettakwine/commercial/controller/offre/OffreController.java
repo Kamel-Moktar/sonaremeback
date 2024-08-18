@@ -1,7 +1,11 @@
 package sonaremettakwine.commercial.controller.offre;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 import sonaremettakwine.commercial.dao.offre.Offre;
 
@@ -24,9 +28,14 @@ public class OffreController {
         return offreService.getOffreByProforma(proforma);
     }
 
+    @PostMapping("/byproformabytva")
+    double getOffreByProformaByTva(@RequestBody Param param){
+        Proforma proforma= proformaService.getProformaById(param.getProformaId());
+        return offreService.getTotalTva(proforma,param.getTauxTva());
+    }
+
     @GetMapping("/byid/{id}")
     Offre getOffreById(@PathVariable Long id){
-
         return offreService.getOffreById(id);
     }
     @PostMapping("/add")
@@ -46,4 +55,9 @@ public class OffreController {
     }
 
 }
-
+@Data
+@AllArgsConstructor @NoArgsConstructor
+class Param {
+    Long proformaId;
+    double tauxTva;
+}

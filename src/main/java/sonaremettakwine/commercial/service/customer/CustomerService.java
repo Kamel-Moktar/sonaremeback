@@ -44,6 +44,8 @@ public class CustomerService {
         customer1.setAdresse(customer.getAdresse());
         customer1.setPhoneNumber(customer.getPhoneNumber());
         customer1.setFax(customer.getFax());
+        customer1.setExemptFromTax(customer.isExemptFromTax());
+        customer1.setSameCompany(customer.isSameCompany());
 
         return customer1;
     }
