@@ -1,5 +1,8 @@
 package sonaremettakwine.commercial.controller.phase;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sonaremettakwine.commercial.dao.invoice.Invoice;
@@ -7,9 +10,11 @@ import sonaremettakwine.commercial.dao.phase.LieuPhase;
 import sonaremettakwine.commercial.dao.phase.Phase;
 import sonaremettakwine.commercial.dao.phase.TypePhase;
 import sonaremettakwine.commercial.dao.session.Session;
+import sonaremettakwine.commercial.service.phase.Chronogramme;
 import sonaremettakwine.commercial.service.phase.PhaseService;
 import sonaremettakwine.commercial.service.session.SessionService;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -68,14 +73,22 @@ public class PhaseController {
     }
 
     @GetMapping("/typephase")
-    public TypePhase[] getTypePhaseValues(){
+    public List<TypePhase> getTypePhaseValues(){
         return phaseService.getTypePhaseValues();
     }
     @GetMapping("/lieuphase")
     public LieuPhase[] getLieuPhaseValues(){
         return phaseService.getLieuPhaseValues();
     }
-
-
+    @PostMapping("/chronogramme")
+    public Chronogramme getChronogramme(@RequestBody Param param){
+        return phaseService.getChronogramme(param.getD(),param.getF());
+    }
 }
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+class Param {
+    Date d;
+    Date f;
+}

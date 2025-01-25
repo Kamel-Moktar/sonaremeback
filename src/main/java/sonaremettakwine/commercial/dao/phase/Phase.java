@@ -25,6 +25,7 @@ public class Phase {
     Date startDate;
     Date endDate;
     String type;
+    @ManyToOne
     TypePhase typePhase;
     LieuPhase lieuPhase;
     @ManyToOne

@@ -29,7 +29,7 @@ public class StagiaireService {
 
     public List<Stagiaire> getAllParam(String familyName, String firstName, String birthDay, String customer) {
         return stagiaireRepository.getParamSortByName(
-                birthDay,
+
                familyName ,
                 firstName,
                 customer
@@ -55,6 +55,9 @@ public class StagiaireService {
         stagiaire1.setAdresse(stagiaire.getAdresse());
         stagiaire1.setPhoneNumber(stagiaire.getPhoneNumber());
         stagiaire1.setMailAdresse(stagiaire.getMailAdresse());
+        stagiaire1.setGsp(stagiaire.getGsp());
+        stagiaire1.setSchoolLevel(stagiaire.getSchoolLevel());
+        stagiaire1.setSexe(stagiaire.getSexe());
 
 
         return stagiaire1;

@@ -64,9 +64,6 @@ public class CommercialApplication {
 //                  decoupageRepository.save(decoupage);
 //              });
 //
-//
-//
-//
 //            } catch (FileNotFoundException e) {
 //                e.printStackTrace();
 //            } catch (IOException e) {

@@ -41,8 +41,6 @@ public class SessionService {
         session1.setEndDate(session.getEndDate());
         session1.setAction(session.getAction());
         session1.setNbrStagPlanned(session.getNbrStagPlanned());
-
-
         return session1;
     }
 

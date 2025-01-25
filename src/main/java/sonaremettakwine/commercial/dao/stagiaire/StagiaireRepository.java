@@ -15,13 +15,12 @@ public interface StagiaireRepository extends JpaRepository<Stagiaire, Long> {
     List<Stagiaire> getAllSortByName();
 
     @Query("select s from Stagiaire s " +
-            "  where  format(s.birthDay ,'dd/mm/yyyy') like '%'||:bd||'%' " +
-            " and upper(s.familyName) like '%'||upper(:fl)||'%' " +
-            " and upper(s.firstName) like '%'||upper(:fn)||'%' " +
+            "  where   upper(s.familyName||' '||s.firstName) like '%'||upper(:fl)||'%' " +
+            " and upper(s.firstName||' '||s.familyName) like '%'||upper(:fn)||'%' " +
             " and upper(s.customer.shortName) like '%'||upper(:cr)||'%' " +
             " order by s.familyName ")
     List<Stagiaire> getParamSortByName(
-            @RequestParam String bd,
+
             @RequestParam String fl,
             @RequestParam String fn,
             @RequestParam String cr

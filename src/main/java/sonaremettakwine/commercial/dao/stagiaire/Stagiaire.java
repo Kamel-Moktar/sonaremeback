@@ -26,7 +26,12 @@ public class Stagiaire {
     String adresse;
     String phoneNumber;
     String mailAdresse;
+    Sexe sexe=Sexe.M;
+    String schoolLevel;
+    String gsp;
     @ManyToOne
     Customer customer;
 
 }
+
+

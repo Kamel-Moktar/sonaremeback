@@ -4,6 +4,7 @@ package sonaremettakwine.commercial.controller.benefit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sonaremettakwine.commercial.dao.benifit.Benefit;
+import sonaremettakwine.commercial.dao.benifit.Tva;
 import sonaremettakwine.commercial.service.benefit.BenefitService;
 
 import java.util.List;
@@ -26,6 +27,14 @@ public class BenefitController {
     public Benefit getById(@PathVariable Long id) {
         return benefitService.getBenefitById(id);
     }
+
+
+    @GetMapping("/tva")
+    public Tva[] getTva() {
+        return Tva.values();
+    }
+
+
 
     @PostMapping("/add")
     public Benefit add(@RequestBody Benefit benefit) {

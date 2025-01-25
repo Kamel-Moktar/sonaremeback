@@ -3,11 +3,14 @@ package sonaremettakwine.commercial.controller.pament;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sonaremettakwine.commercial.dao.encaissement.Encaissement;
+import sonaremettakwine.commercial.dao.invoice.Invoice;
 import sonaremettakwine.commercial.dao.payment.Payment;
 import sonaremettakwine.commercial.service.payment.PaymentService;
 
 
 import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("payment")
 public class PaymentController {
@@ -57,6 +60,12 @@ public class PaymentController {
     public Payment delete(@RequestBody Payment payment) {
         paymentService.delete(payment);
         return payment;
+    }
+
+    @GetMapping("/identification/{paymentId}")
+    public Map<Long, Invoice> paymentIdentification(@PathVariable  Long paymentId){
+        Payment payment=getPaymentById(paymentId);
+        return paymentService.paymentIdentification(payment);
     }
 
     @PutMapping("/update")

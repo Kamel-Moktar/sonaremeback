@@ -13,7 +13,6 @@ public enum  Tva {
         this.libelle = libelle;
     }
 
-
     public BigDecimal getTaux() {
         return this.taux;
     }

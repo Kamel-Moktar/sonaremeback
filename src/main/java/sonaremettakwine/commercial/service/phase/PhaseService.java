@@ -1,16 +1,16 @@
 package sonaremettakwine.commercial.service.phase;
 
 
+import org.hibernate.type.descriptor.DateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sonaremettakwine.commercial.dao.phase.LieuPhase;
-import sonaremettakwine.commercial.dao.phase.Phase;
-import sonaremettakwine.commercial.dao.phase.PhaseRepository;
-import sonaremettakwine.commercial.dao.phase.TypePhase;
+import sonaremettakwine.commercial.dao.phase.*;
 import sonaremettakwine.commercial.dao.session.Session;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -19,6 +19,9 @@ public class PhaseService {
 
     @Autowired
     PhaseRepository phaseRepository;//
+
+    @Autowired
+    TypePhaseRepository typePhaseRepository;
 
     public List<Phase> getAll() {
 
@@ -67,7 +70,7 @@ public class PhaseService {
         if (phases.isEmpty()) {
             phase.setName("FT 1");
             phase.setStartDate(session.getStartDate());
-            phase.setTypePhase(TypePhase.FT);
+            phase.setTypePhase(typePhaseRepository.findByType("FT"));
             phase.setLieuPhase(LieuPhase.A_L_ECOLE);
         } else {
             Phase ph = phases.get(phases.size() - 1);
@@ -75,9 +78,9 @@ public class PhaseService {
 
             GregorianCalendar c = new GregorianCalendar();
             c.setTime(ph.getEndDate());
-            c.add(GregorianCalendar.DAY_OF_MONTH,2);
+            c.add(GregorianCalendar.DAY_OF_MONTH, 2);
             phase.setStartDate(c.getTime());
-            phase.setTypePhase(TypePhase.FT);
+            phase.setTypePhase(typePhaseRepository.findByType("FT"));
             phase.setLieuPhase(LieuPhase.A_L_ECOLE);
         }
 
@@ -87,11 +90,46 @@ public class PhaseService {
         return phase;
     }
 
-    public TypePhase[] getTypePhaseValues() {
-        return TypePhase.values();
+    public List<TypePhase> getTypePhaseValues() {
+        return typePhaseRepository.findAll();
     }
 
     public LieuPhase[] getLieuPhaseValues() {
         return LieuPhase.values();
     }
+
+
+    public Chronogramme getChronogramme(Date d, Date f) {
+        List<Phase> phases = phaseRepository.getPhaseForChronogramme(d, f);
+
+        Session session = new Session();
+        Chronogramme chronogramme = new Chronogramme();
+
+        if (!phases.isEmpty()) {
+            session = phases.get(0).getSession();
+            ChronogrammeRow chronogrammeRow = new ChronogrammeRow();
+            chronogrammeRow.setSession(session);
+
+            for (Phase ph : phases) {
+                if (!ph.getSession().equals(session)) {
+                    chronogramme.getChronogrammeRows().add(chronogrammeRow);
+                    session = ph.getSession();
+                    chronogrammeRow = new ChronogrammeRow();
+                    chronogrammeRow.setSession(session);
+                }
+                Date begin=d.compareTo(ph.getStartDate())>=0?d:ph.getStartDate();
+
+                 while(begin.compareTo(ph.getEndDate())<=0 && begin.compareTo(f)<=0){
+                     ChronogrammeCellule chronogrammeCellule=new ChronogrammeCellule(ph.getTypePhase(),begin);
+                     chronogrammeRow.getCellules().add(chronogrammeCellule);
+                     begin=new Date(begin.getTime()+ 24 * 60 * 60 * 1000);
+                 }
+            }
+            chronogramme.getChronogrammeRows().add(chronogrammeRow);
+
+        }
+        return chronogramme;
+    }
+
+
 }

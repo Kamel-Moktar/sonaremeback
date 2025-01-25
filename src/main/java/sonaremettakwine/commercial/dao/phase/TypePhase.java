@@ -1,8 +1,27 @@
 package sonaremettakwine.commercial.dao.phase;
 
-public enum TypePhase {
-    FT,
-    FMT,
-    COUPURE,
-    RETOUR_UNITE
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class TypePhase {
+    @Id
+    @GeneratedValue
+    Long Id;
+    String type;
+    String label;
 }
+
+
+
+//        FT,
+//        FMT,
+//        COUPURE,
+//        RETOUR_UNITE

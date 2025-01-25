@@ -7,9 +7,11 @@ import sonaremettakwine.commercial.dao.booking.Booking;
 import sonaremettakwine.commercial.dao.booking.RoomType;
 import sonaremettakwine.commercial.dao.inscription.Inscription;
 import sonaremettakwine.commercial.dao.session.Session;
+import sonaremettakwine.commercial.dao.stagiaire.Stagiaire;
 import sonaremettakwine.commercial.service.booking.BookingService;
 import sonaremettakwine.commercial.service.inscription.InscriptionService;
 import sonaremettakwine.commercial.service.session.SessionService;
+import sonaremettakwine.commercial.service.stagiaire.StagiaireService;
 
 import java.util.List;
 
@@ -21,6 +23,9 @@ public class BookingController {
     BookingService bookingService;
     @Autowired
     InscriptionService inscriptionService;
+
+    @Autowired
+    StagiaireService stagiaireService;
    @Autowired
     SessionService sessionService;
 
@@ -34,11 +39,18 @@ public class BookingController {
         return RoomType.values();
     }
 
-    @GetMapping("/allbystagiaire/{inscriptionId}")
+    @GetMapping("/allbyinscription/{inscriptionId}")
     public List<Booking> getAllByInscription(@PathVariable  Long inscriptionId) {
         Inscription inscription=inscriptionService.getInscriptionById(inscriptionId);
         return bookingService.getBookingByInscription(inscription);
     }
+
+    @GetMapping("/allbystagiaire/{stagiaireId}")
+    public List<Booking> getAllByStagiare(@PathVariable  Long stagiaireId) {
+        Stagiaire stagiaire=stagiaireService.getStagiaireById(stagiaireId);
+        return bookingService.getBookingByStagiaire(stagiaire);
+    }
+
 
 
     @GetMapping("/favoritebooking/{sessionId}")

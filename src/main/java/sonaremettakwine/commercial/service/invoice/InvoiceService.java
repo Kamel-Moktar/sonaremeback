@@ -3,6 +3,8 @@ package sonaremettakwine.commercial.service.invoice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
+import sonaremettakwine.commercial.dao.customer.Customer;
 import sonaremettakwine.commercial.dao.invoice.Invoice;
 import sonaremettakwine.commercial.dao.invoice.InvoiceRepository;
 
@@ -24,13 +26,16 @@ public class InvoiceService {
 
     }
 
+
+    public List<Invoice> getDebts(){
+       return  invoiceRepository.getDebts();
+    }
+
     public Invoice getInvoiceById(Long id) {
         return invoiceRepository.getReferenceById(id);
     }
 
-    public List<Invoice> getDebts() {
-        return invoiceRepository.debts();
-    }
+
 
     public List<Invoice> getDebtsByNumberByCustomerByDate(String number, String shortName, String date) {
         return invoiceRepository.getDebtsByNumberByCustomerByDate(number, shortName, date);
@@ -83,14 +88,18 @@ public class InvoiceService {
 
 
     public Long nextInvoiceNumber(String year) {
-
+       Long y= Long.parseLong(year);
+        String nextYear=(y+1)+"";
         String d1 = "01/01/" + year;
-        String d2 = "31/12/" + year;
+        String d2 = "01/01/" + nextYear;
+
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
         try {
             Date date1 = formatter.parse(d1);
             Date date2 = formatter.parse(d2);
+
             List<Invoice> invoices = invoiceRepository.getBetweenTowDateSortByNumber(date1, date2);
+
             if (!invoices.isEmpty()) return invoices.get(0).getNumber() + 1;
             return 1L;
 
@@ -98,6 +107,16 @@ public class InvoiceService {
             e.printStackTrace();
         }
         return 1L;
+    }
+
+
+    public List<Customer> getCustomerWithDebts(){
+        return invoiceRepository.getCustomerWithDebts();
+    }
+
+
+    public List<Invoice> getDebsByCustomer(Customer customer){
+        return invoiceRepository.getDebtsByCustomer(customer);
     }
 
 
