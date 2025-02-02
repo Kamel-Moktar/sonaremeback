@@ -3,6 +3,7 @@ package sonaremettakwine.commercial.service.inscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sonaremettakwine.commercial.dao.customer.Customer;
 import sonaremettakwine.commercial.dao.inscription.Inscription;
 import sonaremettakwine.commercial.dao.inscription.InscriptionRepository;
 import sonaremettakwine.commercial.dao.session.Session;
@@ -23,10 +24,7 @@ public class InscriptionService {
     StagiaireService stagiaireService;
 
     public List<Inscription> getAll(){
-
-
         return inscriptionRepository.findAll();
-
     }
 
     public Inscription getInscriptionById(Long id){
@@ -42,7 +40,6 @@ public class InscriptionService {
     public void delete(Inscription inscription){ inscriptionRepository.delete(inscription);  }
 
     public Inscription update(Inscription inscription){
-
         Inscription inscription1=getInscriptionById(inscription.getId());
         inscription1.setStagiaire(inscription.getStagiaire());
         inscription1.setSession(inscription.getSession());
@@ -64,6 +61,14 @@ public class InscriptionService {
     public List<Inscription> getAllByStagiaire(Long stagiaireId) {
         Stagiaire stagiaire=stagiaireService.getStagiaireById(stagiaireId);
         return inscriptionRepository.getAllByStagiaire(stagiaire);
+    }
+
+    public List<Inscription> getByStagiaireCustomer(Customer customer,Session session){
+        return inscriptionRepository.getBySessionAndStagiaireCustomerAndArriveDateNotNullOrderByStagiaireFirstName(session,customer);
+    }
+
+    public List<Session> getSessionByCustomer(Customer customer){
+        return inscriptionRepository.getSessionByCustomer(customer);
     }
 }
 

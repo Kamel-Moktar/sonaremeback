@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TypePhase {
+public class   TypePhase {
     @Id
     @GeneratedValue
     Long Id;

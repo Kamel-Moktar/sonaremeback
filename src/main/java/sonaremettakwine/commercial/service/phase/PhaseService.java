@@ -58,8 +58,14 @@ public class PhaseService {
         phase1.setSession(phase.getSession());
         phase1.setLieuPhase(phase.getLieuPhase());
         phase1.setTypePhase(phase.getTypePhase());
+        phase1.setDuration(phase.getDuration());
 
+        return phase1;
+    }
 
+    public Phase setIsBilled(Long id,boolean isBilled ) {
+        Phase phase1 = getPhaseById(id);
+        phase1.setBilled(isBilled);
         return phase1;
     }
 
@@ -132,4 +138,7 @@ public class PhaseService {
     }
 
 
+    public List<Phase> getAllBySessionForBilling(Session session) {
+        return phaseRepository.getAllPhaseForBilling(session);
+    }
 }

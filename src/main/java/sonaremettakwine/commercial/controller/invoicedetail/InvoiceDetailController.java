@@ -2,8 +2,12 @@ package sonaremettakwine.commercial.controller.invoicedetail;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import sonaremettakwine.commercial.dao.inscription.Inscription;
 import sonaremettakwine.commercial.dao.invoice.Invoice;
 import sonaremettakwine.commercial.dao.invoicedetail.InvoiceDetail;
+import sonaremettakwine.commercial.dao.phase.Phase;
+import sonaremettakwine.commercial.dao.session.Session;
+import sonaremettakwine.commercial.service.inscription.InscriptionService;
 import sonaremettakwine.commercial.service.invoice.InvoiceService;
 import sonaremettakwine.commercial.service.invoicedetail.InvoiceDetailService;
 
@@ -18,6 +22,9 @@ public class InvoiceDetailController {
     @Autowired
     InvoiceService invoiceService;
 
+    @Autowired
+    InscriptionService inscriptionService;
+
 
     @GetMapping("/")
     public List<InvoiceDetail> getAll() {
@@ -30,14 +37,34 @@ public class InvoiceDetailController {
     }
 
     @DeleteMapping("/{id}")
-    public  void delete(@PathVariable Long id){
+    public  InvoiceDetail delete(@PathVariable Long id){
         InvoiceDetail invoiceDetail=invoiceDetailService.getById(id);
-        invoiceDetailService.delete(invoiceDetail);
+        return invoiceDetailService.delete(invoiceDetail);
     }
+
+    @DeleteMapping("/{id}/{id2}")
+    public  InvoiceDetail deleteAll(@PathVariable Long id,@PathVariable Long id2){
+        Invoice invoice=invoiceService.getInvoiceById(id2);
+        Inscription inscription=inscriptionService.getInscriptionById(id);
+        return invoiceDetailService.deleteAll(inscription,invoice);
+    }
+
     @GetMapping("/invoice/{id}")
     public List<InvoiceDetail> getByInvoice(@PathVariable Long id){
         Invoice invoice=invoiceService.getInvoiceById(id);
         return invoiceDetailService.getByInvoice(invoice);
+    }
+
+    @GetMapping("/inscription/{id}")
+    public List<Inscription> getInscriptionByInvoice(@PathVariable Long id){
+        Invoice invoice=invoiceService.getInvoiceById(id);
+        return invoiceDetailService.getDistinctInscriptionByInvoice(invoice);
+    }
+
+    @GetMapping("/session/{id}")
+    public List<Session> getDistinctSessionByInvoice(@PathVariable Long id){
+        Invoice invoice=invoiceService.getInvoiceById(id);
+        return invoiceDetailService.getDistinctSessionByInvoice(invoice);
     }
 
     @PutMapping("/")
@@ -51,4 +78,22 @@ public class InvoiceDetailController {
 
     }
 
+    @PostMapping("/add")
+    public InvoiceDetail add1(@RequestBody  InvoiceDetail invoiceDetail){
+        return invoiceDetailService.add1(invoiceDetail);
+
+    }
+
+
+    @PostMapping("/isbilled")
+    public void updateIsBilled(@RequestBody  InvoiceDetail invoiceDetail){
+         invoiceDetailService.updatePhaseIsBilled(invoiceDetail);
+
+    }
+    @GetMapping("/phase/{id1}/{id2}")
+    public List<Phase> getPhase(@PathVariable Long id1,@PathVariable Long id2){
+        Invoice invoice=invoiceService.getInvoiceById(id2);
+        Inscription inscription=inscriptionService.getInscriptionById(id1);
+        return invoiceDetailService.getPhase(inscription,invoice);
+    }
 }

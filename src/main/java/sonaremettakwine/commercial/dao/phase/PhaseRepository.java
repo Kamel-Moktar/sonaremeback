@@ -26,4 +26,9 @@ public interface PhaseRepository extends JpaRepository<Phase, Long> {
             " order by p.session.id, p.startDate")
     List<Phase> getPhaseForChronogramme(@RequestParam Date d, @RequestParam Date f);
 
+    @Query("select p from Phase p  "+
+            "where p.session=:session " +
+            "  and p.typePhase.type  in ('FT' ,'FMT') " +
+            "  and not p.isBilled")
+    List<Phase> getAllPhaseForBilling(@RequestParam Session session);
 }

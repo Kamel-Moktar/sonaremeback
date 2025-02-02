@@ -39,6 +39,10 @@ public class BookingService {
         return bookingRepository.findAll();
     }
 
+    public List<Booking> getBookingsInPeriode(Inscription inscription,Date d, Date f ) {
+        return bookingRepository.getBookingsInPeriodeByInscription(inscription,d,f);
+    }
+
     public Booking getBookingById(Long id) {
         return bookingRepository.getReferenceById(id);
     }
@@ -115,6 +119,7 @@ public class BookingService {
 
         return already;
     }
+
 
 
 

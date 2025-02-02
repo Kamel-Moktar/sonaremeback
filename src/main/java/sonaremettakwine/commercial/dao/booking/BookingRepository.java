@@ -9,6 +9,7 @@ import sonaremettakwine.commercial.dao.inscription.Inscription;
 import sonaremettakwine.commercial.dao.session.Session;
 import sonaremettakwine.commercial.dao.stagiaire.Stagiaire;
 
+import java.util.Date;
 import java.util.List;
 
 @RepositoryRestResource
@@ -33,5 +34,10 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
 
     Booking getBookingById(Long id);
 
+    @Query("select b from Booking  b " +
+            " where b.leavingDate >= :d " +
+            " and  b.arriveDate <= :f " +
+            " and b.inscription= :inscription")
+    List<Booking> getBookingsInPeriodeByInscription(@RequestParam  Inscription inscription,@RequestParam Date d,@RequestParam Date f);
 
 }

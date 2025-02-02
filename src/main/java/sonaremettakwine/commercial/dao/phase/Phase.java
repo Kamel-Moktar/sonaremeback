@@ -25,11 +25,13 @@ public class Phase {
     Date startDate;
     Date endDate;
     String type;
+    double duration;
     @ManyToOne
     TypePhase typePhase;
     LieuPhase lieuPhase;
     @ManyToOne
     Session session;
+    boolean isBilled=false;
 
 
 }

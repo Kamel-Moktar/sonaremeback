@@ -16,7 +16,7 @@ public interface SaleRepository extends JpaRepository<Sale,Long> {
 
 
 
-    @Query("select s from Sale s where s.invoice=:invoice order by s.id DESC" )
+    @Query("select s from Sale s where s.invoice=:invoice order by s.benefit.designation" )
     List<Sale> getSaleByInvoice(@RequestParam Invoice invoice);
 
 
