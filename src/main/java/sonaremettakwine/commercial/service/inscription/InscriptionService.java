@@ -28,7 +28,7 @@ public class InscriptionService {
     }
 
     public Inscription getInscriptionById(Long id){
-        return inscriptionRepository.getReferenceById(id);
+        return inscriptionRepository.getInscriptionById(id);
     }
 
 

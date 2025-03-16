@@ -27,4 +27,5 @@ public interface PriceRepository extends JpaRepository<Price, Long> {
 
     List<Price> getAllByBenefitAndHotelOrderByDateAsc(Benefit benefit, Hotel hotel);
 
+    Price getPriceById(Long id);
 }

@@ -18,7 +18,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Booking {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne
     Inscription inscription;

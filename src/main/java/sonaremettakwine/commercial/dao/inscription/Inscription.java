@@ -1,10 +1,7 @@
 package sonaremettakwine.commercial.dao.inscription;
 
 import com.fasterxml.jackson.databind.DatabindException;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Inscription {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     @ManyToOne
     Stagiaire stagiaire;

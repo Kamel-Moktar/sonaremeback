@@ -11,4 +11,6 @@ import java.util.List;
 public interface DomaineRepository extends JpaRepository<Domaine,Long> {
     @Query("select d from Domaine d order by d.id DESC ") //trier les enregistrement
     List<Domaine> getAllSortByID();
+
+    Domaine getDomaineById(Long id);
 }

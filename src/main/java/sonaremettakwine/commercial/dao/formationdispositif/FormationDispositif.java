@@ -10,7 +10,7 @@ import sonaremettakwine.commercial.dao.module.Module;
 @Entity
 @Data@AllArgsConstructor@NoArgsConstructor
 public class FormationDispositif {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     @ManyToOne
     Module module;

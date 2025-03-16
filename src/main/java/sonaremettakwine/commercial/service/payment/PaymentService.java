@@ -34,7 +34,7 @@ public class PaymentService {
     }
 
     public Payment getPaymentById(Long id) {
-        return paymentRepository.getReferenceById(id);
+        return paymentRepository.getPaymentById(id);
     }
 
     public List<Encaissement> getInvoiceByPayment(Payment payment) {

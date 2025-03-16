@@ -11,4 +11,6 @@ import java.util.List;
 public interface HotelRepository extends JpaRepository<Hotel,Long> {
     @Query("select d from Hotel d order by d.id DESC ") //trier les enregistrement
     List<Hotel> getAllSortByID();
+
+    Hotel getHotelById(Long id);
 }

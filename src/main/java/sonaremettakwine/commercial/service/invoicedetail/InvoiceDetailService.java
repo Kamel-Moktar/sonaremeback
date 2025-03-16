@@ -23,6 +23,7 @@ import sonaremettakwine.commercial.service.inscription.InscriptionService;
 import sonaremettakwine.commercial.service.phase.PhaseService;
 import sonaremettakwine.commercial.service.price.PriceService;
 import sonaremettakwine.commercial.service.sale.SaleService;
+import sonaremettakwine.commercial.service.session.SessionService;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -56,7 +57,7 @@ public class InvoiceDetailService {
     }
 
     public InvoiceDetail getById(Long id) {
-        return invoiceDetailRepository.getReferenceById(id);
+        return invoiceDetailRepository.getInvoiceDetailById(id);
     }
 
 
@@ -79,7 +80,7 @@ public class InvoiceDetailService {
         invoiceDetail1.setQte(invoiceDetail.getQte());
         invoiceDetail1.setObs(invoiceDetail.getObs());
 
-        updateSale(invoiceDetail1.getInvoice());
+//        updateSale(invoiceDetail1.getInvoice());
         return invoiceDetail;
     }
 
@@ -96,9 +97,7 @@ public class InvoiceDetailService {
         List<InvoiceDetail> invoiceDetails = invoiceDetailRepository.getAllByInvoiceAndInscription(invoice, inscription);
 
         for (InvoiceDetail invoiceDetail : invoiceDetails) {
-
             invoiceDetailRepository.delete(invoiceDetail);
-            updateSale(invoice);
             updatePhaseIsBilled(invoiceDetail);
         }
 
@@ -106,15 +105,18 @@ public class InvoiceDetailService {
         return null;
     }
 
+
+    public void refresh(InvoiceDetail invoiceDetail) {
+        updatePhaseIsBilled(invoiceDetail);
+        updateSale(invoiceDetail.getInvoice());
+    }
+
     public void updatePhaseIsBilled(InvoiceDetail invoiceDetail) {
-
-
         List<Inscription> reelInscriptions = inscriptionService.getByStagiaireCustomer(invoiceDetail.getInvoice().getCustomer(), invoiceDetail.getPhase().getSession());
         List<Inscription> billedInscriptions = getDistinctInscriptionByPhaseAndCustomer(invoiceDetail.getPhase(), invoiceDetail.getInvoice().getCustomer());
-
-        phaseService.setIsBilled(invoiceDetail.getPhase().getId(), reelInscriptions.size()== billedInscriptions.size());
-
+        phaseService.setIsBilled(invoiceDetail.getPhase().getId(), reelInscriptions.size() == billedInscriptions.size());
     }
+
 
     List<Inscription> getByInscriptionAndPhase(Inscription inscription, Phase phase) {
         return invoiceDetailRepository.getInscriptionByPhase(inscription, phase);
@@ -181,59 +183,64 @@ public class InvoiceDetailService {
 
                 invoiceDetailRepository.save(invoiceDetail3);
             }
-
-            updatePhaseIsBilled(invoiceDetail1);
-            updateSale(invoiceDetail1.getInvoice());
         }
         return invoiceDetail;
     }
 
-@Autowired
+    @Autowired
     UnitRepository unitRepository;
 
+    @Autowired
+    SessionService sessionService;
+
     public void updateSale(Invoice invoice) {
-      List<Sale> sales=saleService.getSaleByInvoice(invoice);
-      for(Sale s:sales)saleService.delete(s);
+
+        List<Sale> sales = saleService.getSaleByInvoice(invoice);
+        for (Sale s : sales) saleService.delete(s);
+
         SimpleDateFormat d = new SimpleDateFormat("dd/MM/yy");
 
-      List<Vente> ventes=invoiceDetailRepository.getSaleOfInvoice(invoice);
-      for(Vente v:ventes){
-          Double qte=v.getNumber().doubleValue();
-          Benefit enseignement = benefitService.getBenefitById(1L);
-          Sale sale=new Sale();
-          sale.setInvoice(v.getInvoice());
-          sale.setBenefit(v.getBenefit());
-          sale.setUnit(unitRepository.getReferenceById("Unité"));
-          sale.setQuantity(v.getQuantity());
-          sale.setNumber(qte);
-          sale.setPrice(v.getPrice());
-          if(v.getBenefit().equals(enseignement))
-
-          sale.setObservation( "  "+v.getSession().getAction().getName() +"  '"+v.getSession().getName()+" du "+d.format(v.getSession().getStartDate())+" au "+d.format(v.getSession().getEndDate())+"' ");
+        List<Vente> ventes = invoiceDetailRepository.getSaleOfInvoice(invoice);
 
 
-          saleService.add(sale);
-      }
+        for (Vente v : ventes) {
+
+            Double qte = v.getNumber().doubleValue();
+            Benefit benefit = v.getBenefit();
+            Session session = v.getSession();
+            Benefit enseignement = benefitService.getBenefitById(1L);
+
+
+            Sale sale = new Sale();
+            sale.setInvoice(invoice);
+            sale.setBenefit(benefit);
+            sale.setUnit(unitRepository.getReferenceById("Personne"));
+            sale.setQuantity(v.getQuantity());
+            sale.setNumber(qte);
+            sale.setPrice(v.getPrice());
+            if (benefit.equals(enseignement))
+
+                sale.setObservation("  " + session.getAction().getName() + "  '" + session.getName() + " du " + d.format(session.getStartDate()) + " au " + d.format(session.getEndDate()) + "' ");
+
+
+            saleService.add(sale);
+        }
 
 
     }
 
 
-
-
     public List<Session> getDistinctSessionByInvoice(Invoice invoice) {
-
         return invoiceDetailRepository.getDistinctInscriptionSessionByInvoice(invoice);
     }
 
     public InvoiceDetail add1(InvoiceDetail invoiceDetail) {
-        InvoiceDetail invoiceDetail1=invoiceDetailRepository.save(invoiceDetail);
+        InvoiceDetail invoiceDetail1 = invoiceDetailRepository.save(invoiceDetail);
         updateSale(invoiceDetail1.getInvoice());
         return invoiceDetail1;
     }
 
     public List<Phase> getPhase(Inscription inscription, Invoice invoice) {
-
         return invoiceDetailRepository.getPhaseBYInscriptionAndInvoice(inscription, invoice);
     }
 }

@@ -21,4 +21,5 @@ public interface SessionRepository extends JpaRepository<Session,Long> {
             " order by s.startDate DESC")
     List<Session> getAllByNameByThemeByStartDate(@RequestParam String name,@RequestParam String theme, @RequestParam String startDate);
 
+    Session getSessionById(Long id);
 }

@@ -13,4 +13,6 @@ public interface PaymentRepository extends JpaRepository<Payment,Long> {
 
     @Query("select p from Payment p order by p.id DESC " )
     List<Payment> getAllSortByID();
+
+    Payment getPaymentById(Long id);
 }

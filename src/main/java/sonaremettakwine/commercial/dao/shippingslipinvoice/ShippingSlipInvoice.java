@@ -1,9 +1,6 @@
 package sonaremettakwine.commercial.dao.shippingslipinvoice;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +13,7 @@ import sonaremettakwine.commercial.dao.shippingslip.ShippingSlip;
 @NoArgsConstructor
 public class ShippingSlipInvoice {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     @ManyToOne
     ShippingSlip shippingSlip;

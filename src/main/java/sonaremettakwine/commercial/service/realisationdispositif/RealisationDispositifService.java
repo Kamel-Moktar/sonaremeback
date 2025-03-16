@@ -20,7 +20,7 @@ public class RealisationDispositifService{
     }
 
     public RealisationDispositif getRealisationDispositifById(Long id) {
-        return realisationDispositifRepository.getReferenceById(id);
+        return realisationDispositifRepository.getRealisationDispositifById(id);
     }
 
 

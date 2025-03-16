@@ -44,7 +44,7 @@ public class BookingService {
     }
 
     public Booking getBookingById(Long id) {
-        return bookingRepository.getReferenceById(id);
+        return bookingRepository.getBookingById(id);
     }
 
 

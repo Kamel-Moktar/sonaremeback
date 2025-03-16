@@ -12,4 +12,6 @@ public interface ModuleRepository extends JpaRepository<Module, Long> {
     List<Module> findAllByOrderByIdDesc();
 
   List<Module> findByNameLikeAndDomaineNameLikeOrderByIdDesc(String name,String domaineName);
+
+    Module getModuleById(Long id);
 }

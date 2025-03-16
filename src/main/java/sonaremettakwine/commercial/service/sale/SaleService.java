@@ -44,7 +44,7 @@ public class SaleService {
     }
 
     public Sale getSaleById(Long id) {
-        return saleRepository.getReferenceById(id);
+        return saleRepository.getSaleById(id);
     }
 
     public Sale update(Sale newSale) {

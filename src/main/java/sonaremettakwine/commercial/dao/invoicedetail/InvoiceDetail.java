@@ -1,9 +1,6 @@
 package sonaremettakwine.commercial.dao.invoicedetail;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +16,7 @@ import sonaremettakwine.commercial.dao.phase.Phase;
 @NoArgsConstructor
 public class InvoiceDetail {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     @ManyToOne

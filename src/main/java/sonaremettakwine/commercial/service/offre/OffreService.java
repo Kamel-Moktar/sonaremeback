@@ -43,7 +43,7 @@ public class OffreService {
     }
 
     public Offre getOffreById(Long id) {
-        return offreRepository.getReferenceById(id);
+        return offreRepository.getOffreById(id);
     }
 
     public Offre update(Offre newOffre) {

@@ -32,7 +32,7 @@ public class InvoiceService {
     }
 
     public Invoice getInvoiceById(Long id) {
-        return invoiceRepository.getReferenceById(id);
+        return invoiceRepository.getInvoiceById(id);
     }
 
 

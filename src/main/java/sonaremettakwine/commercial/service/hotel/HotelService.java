@@ -22,7 +22,7 @@ public class HotelService {
     }
 
     public Hotel getHotelById(Long id) {
-        return hotelRepository.getReferenceById(id);
+        return hotelRepository.getHotelById(id);
     }
 
 

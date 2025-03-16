@@ -46,11 +46,12 @@ public interface InvoiceDetailRepository extends JpaRepository<InvoiceDetail, Lo
             "  and i.phase is not null ")
     List<Phase> getPhaseBYInscriptionAndInvoice(@RequestParam Inscription inscription,@RequestParam Invoice invoice);
 
-    @Query("Select new sonaremettakwine.commercial.dao.sale.Vente(i.invoice,i.benefit,count(i),sum(i.qte),i.price,i.phase.session)  from InvoiceDetail i" +
+    @Query("Select new sonaremettakwine.commercial.dao.sale.Vente(i.invoice,i.benefit,i.phase.session,i.price,count(distinct i),sum(i.qte))  from InvoiceDetail i" +
 
-            " group by i.invoice,i.benefit,i.price,i.price,i.phase.session  ")
+            " group by i.invoice,i.benefit,i.phase.session,i.price ")
 
     List<Vente> getSaleOfInvoice(@RequestParam Invoice invoice);
 
 
+    InvoiceDetail getInvoiceDetailById(Long id);
 }

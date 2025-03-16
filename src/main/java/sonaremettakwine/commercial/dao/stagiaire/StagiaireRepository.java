@@ -25,4 +25,6 @@ public interface StagiaireRepository extends JpaRepository<Stagiaire, Long> {
             @RequestParam String fn,
             @RequestParam String cr
     );
+
+    Stagiaire getStagiaireById(Long id);
 }

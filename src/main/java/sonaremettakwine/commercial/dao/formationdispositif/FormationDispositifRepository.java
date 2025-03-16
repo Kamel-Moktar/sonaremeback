@@ -10,4 +10,6 @@ import java.util.List;
 public interface FormationDispositifRepository extends JpaRepository<FormationDispositif,Long> {
 
    List< FormationDispositif> getAllByActionOrderByModuleName(Action action);
+
+    FormationDispositif getFormationDispositifById(Long id);
 }

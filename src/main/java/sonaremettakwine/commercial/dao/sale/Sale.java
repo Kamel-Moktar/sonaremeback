@@ -15,7 +15,7 @@ import sonaremettakwine.commercial.dao.unit.Unit;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Sale {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     @ManyToOne
     Invoice invoice;

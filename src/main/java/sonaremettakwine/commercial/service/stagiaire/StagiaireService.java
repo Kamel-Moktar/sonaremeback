@@ -24,7 +24,7 @@ public class StagiaireService {
     }
 
     public Stagiaire getStagiaireById(Long id) {
-        return stagiaireRepository.getReferenceById(id);
+        return stagiaireRepository.getStagiaireById(id);
     }
 
     public List<Stagiaire> getAllParam(String familyName, String firstName, String birthDay, String customer) {

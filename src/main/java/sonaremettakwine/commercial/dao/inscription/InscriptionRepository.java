@@ -29,4 +29,7 @@ public interface InscriptionRepository extends JpaRepository<Inscription, Long> 
             " where i.stagiaire.customer=:customer  " +
             " order by i.session.startDate desc ")
     List<Session> getSessionByCustomer(@RequestParam Customer customer);
+
+    Inscription getInscriptionById(Long id);
+
 }

@@ -18,4 +18,6 @@ public interface ShippingSlipRepository extends JpaRepository<ShippingSlip,Long>
             " where s.date between :d1  and :d2 " +
             " order by s.number DESC " ) //trier les enregistrement
     List<ShippingSlip> getBetweenTowDateSortByNumber(@RequestParam Date d1, @RequestParam Date d2);
+
+    ShippingSlip getShippingSlipById(Long id);
 }

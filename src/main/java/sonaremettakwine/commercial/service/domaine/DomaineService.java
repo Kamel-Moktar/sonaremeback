@@ -23,7 +23,7 @@ public class DomaineService  {
     }
 
     public Domaine getDomaineById(Long id){
-        return domaineRepository.getReferenceById(id);
+        return domaineRepository.getDomaineById(id);
     }
 
 
@@ -39,7 +39,7 @@ public class DomaineService  {
         Domaine domaine1=getDomaineById(domaine.getId());
         domaine1.setName(domaine.getName());
 
-
+        domaine1.setColor(domaine.getColor());
         return domaine1;
     }
 }

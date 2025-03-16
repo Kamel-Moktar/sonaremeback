@@ -12,7 +12,7 @@ import sonaremettakwine.commercial.dao.payment.Payment;
 @Data
 @AllArgsConstructor @NoArgsConstructor
 public class Encaissement {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     @ManyToOne
     @NonNull

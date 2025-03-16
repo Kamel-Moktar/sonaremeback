@@ -17,4 +17,7 @@ public interface  ActionRepository extends JpaRepository<Action ,Long> {
             " where upper(a.name) like '%'|| upper(:name)||'%' " +
             " and upper(a.domaine.name) like '%'|| upper(:domaineName)||'%'order by a.name" ) //trier les enregistrement
     List<Action> getAllSortByName(@RequestParam String name,@RequestParam String domaineName);
+
+    Action getActionById(Long id);
+
 }

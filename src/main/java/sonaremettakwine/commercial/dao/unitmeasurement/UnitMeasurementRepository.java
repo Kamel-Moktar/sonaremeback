@@ -16,4 +16,5 @@ public interface UnitMeasurementRepository extends JpaRepository <UnitMeasuremen
     List<UnitMeasurement> getAllSortByID(@RequestParam String name);
 
 
+    UnitMeasurement getUnitMeasurementById(Long id);
 }

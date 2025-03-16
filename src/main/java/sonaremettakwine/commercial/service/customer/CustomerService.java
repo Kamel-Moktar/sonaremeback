@@ -21,7 +21,7 @@ public class CustomerService {
     }
 
     public Customer getCustomerById(Long id){
-        return customerRepository.getReferenceById(id);
+        return customerRepository.getCustomerById(id);
     }
 
 

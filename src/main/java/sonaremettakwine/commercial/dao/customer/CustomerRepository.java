@@ -18,6 +18,8 @@ public interface CustomerRepository extends JpaRepository<Customer,Long> {
         " where upper(c.name) like '%'|| upper(:name) ||'%'" +
         " and upper(c.shortName) like '%'|| upper(:shortName) ||'%' order by c.id DESC")
     List<Customer> getCustomersByName(@RequestParam String name,@RequestParam String shortName);
+
+    Customer getCustomerById(Long id);
 }
 
 

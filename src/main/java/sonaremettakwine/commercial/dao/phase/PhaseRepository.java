@@ -31,4 +31,6 @@ public interface PhaseRepository extends JpaRepository<Phase, Long> {
             "  and p.typePhase.type  in ('FT' ,'FMT') " +
             "  and not p.isBilled")
     List<Phase> getAllPhaseForBilling(@RequestParam Session session);
+
+    Phase getPhaseById(Long id);
 }

@@ -13,10 +13,12 @@ import sonaremettakwine.commercial.dao.session.Session;
 public class Vente {
 
     Invoice invoice;
-    Benefit benefit;
+    Benefit  benefit;
+    Session session;
+    Double price;
     Long number;
     Double quantity;
-    Double price;
-    Session session;
+
+
 
 }

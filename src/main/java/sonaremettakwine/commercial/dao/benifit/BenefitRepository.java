@@ -12,4 +12,6 @@ public interface BenefitRepository extends JpaRepository<Benefit,Long> {
     @Query("select c from Benefit c order by c.Id DESC " ) //trier les enregistrement
     List<Benefit> getAllSortByID();
 
+    Benefit getBenefitById(Long id);
+
 }

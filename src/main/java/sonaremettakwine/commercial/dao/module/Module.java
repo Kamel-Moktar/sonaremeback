@@ -1,9 +1,6 @@
 package sonaremettakwine.commercial.dao.module;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +12,7 @@ import sonaremettakwine.commercial.dao.domaine.Domaine;
 @NoArgsConstructor
 public class Module {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     Long id ;
     String name;
     String objectif;

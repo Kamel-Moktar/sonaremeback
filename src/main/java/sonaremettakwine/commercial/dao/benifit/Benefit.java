@@ -10,8 +10,8 @@ import sonaremettakwine.commercial.dao.unitmeasurement.UnitMeasurement;
 @Data
 @AllArgsConstructor @NoArgsConstructor
 public class Benefit {
-    @Id @GeneratedValue(strategy =GenerationType.AUTO)
-    Long Id;
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
     String designation;
     String description;
     double price;

@@ -21,6 +21,7 @@ public class Action {
     String but;
     double duration;
     double durationHour;
+    String type;
     @ManyToOne
     Domaine domaine;
 }

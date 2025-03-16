@@ -25,7 +25,7 @@ public class PriceService {
 
 
     public Price getPriceById(Long id) {
-        return priceRepository.getReferenceById(id);
+        return priceRepository.getPriceById(id);
     }
 
 

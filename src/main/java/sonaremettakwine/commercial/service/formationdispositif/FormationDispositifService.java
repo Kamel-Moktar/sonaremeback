@@ -27,7 +27,7 @@ public class FormationDispositifService {
     }
 
     public FormationDispositif getFormationDispositifById(Long id) {
-        return formationDispositifRepository.getReferenceById(id);
+        return formationDispositifRepository.getFormationDispositifById(id);
     }
 
 

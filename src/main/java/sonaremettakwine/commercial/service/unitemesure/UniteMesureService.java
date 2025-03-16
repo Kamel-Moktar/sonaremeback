@@ -26,7 +26,7 @@ public class UniteMesureService {
     }
 
     public UnitMeasurement getById(Long id){
-        return unitMeasurementRepository.getReferenceById(id);
+        return unitMeasurementRepository.getUnitMeasurementById(id);
     }
 
     public UnitMeasurement add(UnitMeasurement unitMeasurement) {

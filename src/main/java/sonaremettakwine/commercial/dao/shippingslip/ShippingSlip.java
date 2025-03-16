@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ShippingSlip {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     Long number;
     Date date;

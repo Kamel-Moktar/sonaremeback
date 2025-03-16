@@ -38,4 +38,5 @@ public interface ProformaRepository extends JpaRepository<Proforma, Long> {
             " order by i.number DESC")
     List<Proforma> getAllByNumberByCustomerByDate(@RequestParam  String number,@RequestParam String shortName,@RequestParam String date);
 
+    Proforma getProformaById(Long id);
 }

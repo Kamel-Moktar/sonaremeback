@@ -18,7 +18,7 @@ public class BenefitService {
     public List<Benefit> getAll(){ return benefitRepository.getAllSortByID();    }
 
     public Benefit getBenefitById(Long id){
-        return benefitRepository.getReferenceById(id);
+        return benefitRepository.getBenefitById(id);
     }
 
 

@@ -20,4 +20,5 @@ public interface OffreRepository extends JpaRepository<Offre,Long> {
     @Query("select s from Offre s where s.proforma=:proforma and s.benefit.tva=:taux order by s.id DESC")
     List<Offre> getOffreByProformaByTva(@RequestParam Proforma proforma,@RequestParam double taux);
 
+    Offre getOffreById(Long id);
 }

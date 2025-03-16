@@ -23,7 +23,7 @@ public class ModuleService {
 
 
     public Module getModuleById(Long id){
-        return moduleRepository.getReferenceById(id);
+        return moduleRepository.getModuleById(id);
     }
 
 

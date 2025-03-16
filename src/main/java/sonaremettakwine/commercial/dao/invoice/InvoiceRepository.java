@@ -61,4 +61,6 @@ public interface InvoiceRepository extends JpaRepository<Invoice,Long> {
 
     @Query("select  i from Invoice  i where i.remains<>0  and i.customer=:customer order by i.remains")
     List<Invoice> getDebtsByCustomer(@RequestParam Customer customer);
+
+    Invoice getInvoiceById(Long id);
 }

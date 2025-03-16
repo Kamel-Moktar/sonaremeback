@@ -37,7 +37,7 @@ public class PhaseService {
     }
 
     public Phase getPhaseById(Long id) {
-        return phaseRepository.getReferenceById(id);
+        return phaseRepository.getPhaseById(id);
     }
 
 
@@ -126,7 +126,7 @@ public class PhaseService {
                 Date begin=d.compareTo(ph.getStartDate())>=0?d:ph.getStartDate();
 
                  while(begin.compareTo(ph.getEndDate())<=0 && begin.compareTo(f)<=0){
-                     ChronogrammeCellule chronogrammeCellule=new ChronogrammeCellule(ph.getTypePhase(),begin);
+                     ChronogrammeCellule chronogrammeCellule=new ChronogrammeCellule(ph,begin);
                      chronogrammeRow.getCellules().add(chronogrammeCellule);
                      begin=new Date(begin.getTime()+ 24 * 60 * 60 * 1000);
                  }

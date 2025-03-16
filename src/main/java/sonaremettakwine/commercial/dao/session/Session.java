@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Session {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     Long   id;
     String name;
     Date startDate;

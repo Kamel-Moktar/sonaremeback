@@ -24,7 +24,7 @@ public class ProformaService {
     }
 
     public Proforma getProformaById(Long id) {
-        return proformaRepository.getReferenceById(id);
+        return proformaRepository.getProformaById(id);
     }
 
     public List<Proforma> getDebts() {

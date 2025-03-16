@@ -49,9 +49,10 @@ public class ShippingSlipController {
         return shippingSlipService.addInvoice(shippingSlipInvoice);
     }
 
-    @PostMapping("/deleteinvoice")
-    public ShippingSlipInvoice deleteInvoice(@RequestBody  ShippingSlipInvoice shippingSlipInvoice) {
-        return shippingSlipService.deleteInvoice(shippingSlipInvoice);
+    @DeleteMapping("/invoice/{id}")
+    public void deleteInvoice(@PathVariable Long id) {
+        ShippingSlipInvoice shippingSlipInvoice=shippingSlipService.getShippingSlipInvoiceById(id);
+         shippingSlipService.deleteInvoice(shippingSlipInvoice);
     }
 
     @PostMapping("/accuse")
@@ -59,10 +60,11 @@ public class ShippingSlipController {
         return shippingSlipService.accuse(shippingSlip);
     }
 
-    @PostMapping("/delete")
-    public ShippingSlip delete(@RequestBody ShippingSlip shippingSlip) {
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        ShippingSlip shippingSlip=shippingSlipService.getShippingSlipById(id);
         shippingSlipService.delete(shippingSlip);
-        return shippingSlip;
+
     }
 
     @PutMapping("/update")

@@ -28,7 +28,7 @@ public class ShippingSlipService {
     }
 
     public ShippingSlip getShippingSlipById(Long id){
-        return shippingSlipRepository.getReferenceById(id);
+        return shippingSlipRepository.getShippingSlipById(id);
     }
 
     public List<ShippingSlipInvoice> getInvoiceByShippingSlip(ShippingSlip shippingSlip){
@@ -87,10 +87,10 @@ public class ShippingSlipService {
         return shippingSlipInvoiceRepository.save(shippingSlipInvoice);
     }
 
-    public ShippingSlipInvoice deleteInvoice(ShippingSlipInvoice shippingSlipInvoice) {
+    public void deleteInvoice(ShippingSlipInvoice shippingSlipInvoice) {
         ShippingSlipInvoice shippingSlipInvoice1=shippingSlipInvoiceRepository.getReferenceById(shippingSlipInvoice.getId());
        shippingSlipInvoiceRepository.delete(shippingSlipInvoice1);
-        return shippingSlipInvoice1;
+
     }
 
 
